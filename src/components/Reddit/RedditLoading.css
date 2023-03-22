@@ -1,0 +1,17 @@
+.RedditLoading{
+  backdrop-filter: blur(4px);
+  height: 100vh;
+}
+.LoadingImg {
+  background-image: url("https://p.kindpng.com/picc/s/121-1217791_jpg-black-and-white-download-social-logo-character.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 150px;
+  height: 25%;
+  padding-top: 10em;
+  margin-bottom: -4em;
+}
+
+.LoadingText{
+    text-align: center;
+}

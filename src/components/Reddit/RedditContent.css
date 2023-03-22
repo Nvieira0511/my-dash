@@ -1,0 +1,28 @@
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+.Icon {
+  margin-right: 20px;
+  background-image: url("https://p.kindpng.com/picc/s/121-1217791_jpg-black-and-white-download-social-logo-character.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 50%;
+  height: 100%;
+  width: 120px;
+}
+.RedditBody{
+    background-color: rgb(250, 250, 250);
+    /* margin-top: 340px; */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    filter: drop-shadow(0 -12px 12px);
+    padding: 1em 2.5em 0em 2.5em;
+}
+.divider{
+  margin-top: 35px;
+  padding-bottom: 20px;
+  border-top: 2px solid black;
+}

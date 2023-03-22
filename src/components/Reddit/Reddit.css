@@ -1,0 +1,12 @@
+.RedditParent {
+  background-image: url("https://www.protocol.com/media-library/reddit.jpg?id=23322698&width=1245&height=700&quality=85&coordinates=0%2C0%2C0%2C0");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top;
+  background-position-x: 47%;
+  background-size: 55em;
+  top: 500;
+}
+.isLoading{
+  height: 100vh;
+}
