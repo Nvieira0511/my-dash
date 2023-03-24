@@ -10,13 +10,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router>
+        
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/reddit" element={<Reddit />} />
             {/* <Dashboard /> */}
           </Routes>
-        </Router>
+        
       </div>
     );
   }
