@@ -12,7 +12,6 @@ class RedditCardContainer extends Component {
   static propTypes = {};
 
   RenderCards() {
-    console.log(this.props);
     let cardContainer = [];
     return (cardContainer = this.props.data.map((arr, key) => {
       if (key > 5) return;
