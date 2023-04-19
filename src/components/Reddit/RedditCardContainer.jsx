@@ -6,30 +6,36 @@ import RedditCard from "./RedditCard";
 class RedditCardContainer extends Component {
   constructor(props) {
     super(props);
-    this.RenderCards = this.RenderCards.bind(this);
+    this.state = {
+      data: [],
+    };
+    this.CreateCards = this.CreateCards.bind(this);
   }
-
-  static propTypes = {};
-
-  RenderCards() {
-    let cardContainer = [];
-    return (cardContainer = this.props.data.map((arr, key) => {
-      if (key > 5) return;
-      return <RedditCard key={key} val={arr.data} />;
-    }));
+  componentDidMount() {
+    this.CreateCards();
   }
-
+  CreateCards() {
+    let title = this.props.data[0];
+    let content = this.props.data[1];
+    let cards = [];
+    cards = content.map((val) => {
+      return val;
+    });
+    this.setState({ data: cards[0] }, () => {
+      console.log(this.state);
+    });
+  }
   render() {
-    let subreddit = this.props.subreddit;
-
     return (
       <div className="card-list-subreddit">
         <div className="card-list-header">
-          <h3>{subreddit}</h3>
-          <img src={this.props.icon} alt="" />
+          {/* <h3>{this.state.title}</h3> */}
         </div>
-
-        <div className="card-list">{this.RenderCards()}</div>
+        <div className="card-list">
+          {this.state.data.map((val, i) => {
+            return <RedditCard key={i} data={val} />;
+          })}
+        </div>
       </div>
     );
   }

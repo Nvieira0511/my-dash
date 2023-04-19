@@ -4,17 +4,14 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import "./DashboardNav.css";
 
 class DashboardNav extends Component {
-    constructor(props){
-        super(props)
-        this.redditClick = this.redditClick.bind(this);
-    }
-    redditClick(){
-        console.log('herer');
-        console.log(this.props);
-        this.props.handleRedditFetch()
-    }
+  constructor(props) {
+    super(props);
+    this.redditClick = this.redditClick.bind(this);
+  }
+  redditClick() {
+    this.props.handleRedditFetch();
+  }
   render() {
-    console.log(this.props);
     return (
       <div className="dash">
         <Link to="/reddit" onClick={this.redditClick}>

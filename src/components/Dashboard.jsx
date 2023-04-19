@@ -6,7 +6,6 @@ import DashboardNav from "./DashboardNav";
 
 import "./Dashboard.css";
 
-//reactrouter
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +16,6 @@ class Dashboard extends Component {
     this.handleRedditFetch = this.handleRedditFetch.bind(this);
   }
   handleRedditFetch() {
-    console.log("hereReddit fetch");
     let redditWorldNewsUrl = "https://www.reddit.com/r/worldnews/.json";
     let redditDesitnyUrl = "https://www.reddit.com/r/Destiny/.json";
     let redditUnityUrl = "https://www.reddit.com/r/unity/.json";
@@ -33,21 +31,26 @@ class Dashboard extends Component {
       redditWorldNewsFetch
         .then((res) => res.json())
         .then((json) => {
-          redditData.worldNews.push(json.data.children);
+          json.data.children.forEach((val) => {
+            redditData.worldNews.push(val.data);
+          });
         });
       redditDestinyFetch
         .then((res) => res.json())
         .then((json) => {
-          redditData.destiny.push(json.data.children);
+          json.data.children.forEach((val) => {
+            redditData.destiny.push(val.data);
+          });
         });
       redditUnityFetch
         .then((res) => res.json())
         .then((json) => {
-          redditData.unity.push(json.data.children);
+          json.data.children.forEach((val) => {
+            redditData.unity.push(val.data);
+          });
         });
-        console.log(redditData);
-      this.setState({ redditData});
-      console.log(this.state);
+
+      this.setState({ redditData, redditLoaded: true });
     }, 2000);
   }
   render() {
@@ -66,6 +69,7 @@ class Dashboard extends Component {
               <Reddit
                 isLoaded={this.state.redditLoaded}
                 setRedditLoaded={this.setRedditLoaded}
+                redditData={this.state.redditData}
               />
             }
           />

@@ -6,16 +6,19 @@ class RedditCard extends Component {
     // title: PropTypes.string.isRequired
   };
   static defaultProps = {};
+  componentDidMount(){
+    console.log('card mounted');
+  }
   render() {
     let redditLink = "Reddit.com/";
-    let title = this.props.val.title;
-    let url = this.props.val.url;
-    let permaLink = this.props.val.permalink;
-    let author = this.props.val.author;
-    let subRedditPrefix = this.props.val.subreddit_name_prefixed;
-    let upvotes = this.props.val.score;
-    let comments = this.props.val.num_comments;
-    let date = this.props.val.created;
+    let title = this.props.data.title;
+    let url = this.props.data.url;
+    let permaLink = this.props.data.permalink;
+    let author = this.props.data.author;
+    let subRedditPrefix = this.props.data.subreddit_name_prefixed;
+    let upvotes = this.props.data.score;
+    let comments = this.props.data.num_comments;
+    let date = this.props.data.created;
 
     return (
       <div className="card-body">
@@ -23,6 +26,7 @@ class RedditCard extends Component {
           <a href={redditLink + subRedditPrefix}>{subRedditPrefix}</a>
           <p>u/{author}</p>
         </div>
+
         {url ? (
           <div className="card-img">
             <a href={url}>
@@ -32,6 +36,7 @@ class RedditCard extends Component {
         ) : (
           <div className="card-img-none"></div>
         )}
+
         <div className="card-title">
           <a href={redditLink + permaLink}>{title}</a>
         </div>
