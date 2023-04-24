@@ -6,15 +6,11 @@ import "./DashboardNav.css";
 class DashboardNav extends Component {
   constructor(props) {
     super(props);
-    this.redditClick = this.redditClick.bind(this);
-  }
-  redditClick() {
-    this.props.handleRedditFetch();
   }
   render() {
     return (
       <div className="dash">
-        <Link to="/reddit" onClick={this.redditClick}>
+        <Link to="/reddit">
           <div className="nav-link-reddit">
             <div className="nav-header">
               <h2>reddit</h2>

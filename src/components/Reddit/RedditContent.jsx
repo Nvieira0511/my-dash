@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import RedditCardContainer from "./RedditCardContainer";
-import PropTypes, { object } from "prop-types";
 import "./RedditContent.css";
-import { logDOM } from "@testing-library/react";
 
 class RedditContent extends Component {
   constructor(props) {
@@ -12,14 +10,11 @@ class RedditContent extends Component {
     };
     this.CreateCardContainer = this.CreateCardContainer.bind(this);
   }
-  static propTypes = {
-    redditData: PropTypes.object.isRequired,
-  };
-  componentDidMount() {
+  componentDidMount(){
     this.CreateCardContainer();
   }
   CreateCardContainer() {
-    let redditData = this.props.redditData;
+    let redditData = this.props;
 
     let redditWorldNews = redditData.worldNews;
     let redditDestiny = redditData.destiny;
@@ -47,10 +42,7 @@ class RedditContent extends Component {
           <h1>Reddit</h1>
           <div className="Icon"></div>
         </div>
-        <div className="RedditBody">
-          {this.state.cardContainers}
-          <div className="divider" />
-        </div>
+        <div className="RedditBody">{this.state.cardContainers}</div>
       </div>
     );
   }

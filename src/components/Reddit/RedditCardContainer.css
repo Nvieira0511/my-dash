@@ -24,3 +24,8 @@
 .card-list-header img {
   height: 50px;
 }
+.divider{
+  margin-top: 35px;
+  padding-bottom: 20px;
+  border-top: 2px solid black;
+}

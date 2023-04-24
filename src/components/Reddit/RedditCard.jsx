@@ -6,11 +6,9 @@ class RedditCard extends Component {
     // title: PropTypes.string.isRequired
   };
   static defaultProps = {};
-  componentDidMount(){
-    console.log('card mounted');
-  }
   render() {
-    let redditLink = "Reddit.com/";
+    console.log(this.props);
+    let redditLink = "https://www.reddit.com/";
     let title = this.props.data.title;
     let url = this.props.data.url;
     let permaLink = this.props.data.permalink;
@@ -24,7 +22,7 @@ class RedditCard extends Component {
       <div className="card-body">
         <div className="card-header">
           <a href={redditLink + subRedditPrefix}>{subRedditPrefix}</a>
-          <p>u/{author}</p>
+          <a href={redditLink + "user/" + author}>{author}</a>
         </div>
 
         {url ? (
@@ -38,7 +36,7 @@ class RedditCard extends Component {
         )}
 
         <div className="card-title">
-          <a href={redditLink + permaLink}>{title}</a>
+          <a href={url}>{title}</a>
         </div>
         <div className="card-footer">
           <div className="card-updoots">
@@ -49,10 +47,12 @@ class RedditCard extends Component {
             <p>{upvotes}</p>
           </div>
           <div className="card-stats">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png"
-              alt=""
-            />
+            <a href={redditLink + permaLink}>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png"
+                alt=""
+              />
+            </a>
             <p>{comments}</p>
           </div>
         </div>

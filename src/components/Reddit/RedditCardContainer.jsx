@@ -8,34 +8,37 @@ class RedditCardContainer extends Component {
     super(props);
     this.state = {
       data: [],
+      containerTitle: '',
     };
     this.CreateCards = this.CreateCards.bind(this);
   }
+  
   componentDidMount() {
     this.CreateCards();
   }
   CreateCards() {
+    console.log('creating cards');
+    console.log(this.props);
     let title = this.props.data[0];
     let content = this.props.data[1];
     let cards = [];
     cards = content.map((val) => {
       return val;
     });
-    this.setState({ data: cards[0] }, () => {
-      console.log(this.state);
-    });
+    this.setState({ data: cards[0], containerTitle: title});
   }
   render() {
     return (
       <div className="card-list-subreddit">
         <div className="card-list-header">
-          {/* <h3>{this.state.title}</h3> */}
+          <h3>{this.state.containerTitle}</h3>
         </div>
         <div className="card-list">
           {this.state.data.map((val, i) => {
             return <RedditCard key={i} data={val} />;
           })}
         </div>
+        <div className="divider" />
       </div>
     );
   }
