@@ -8,22 +8,23 @@ class RedditCard extends Component {
   static defaultProps = {};
   render() {
     console.log(this.props);
-    let redditLink = "Reddit.com/";
-    let title = this.props.val.title;
-    let url = this.props.val.url;
-    let permaLink = this.props.val.permalink;
-    let author = this.props.val.author;
-    let subRedditPrefix = this.props.val.subreddit_name_prefixed;
-    let upvotes = this.props.val.score;
-    let comments = this.props.val.num_comments;
-    let date = this.props.val.created;
+    let redditLink = "https://www.reddit.com/";
+    let title = this.props.data.title;
+    let url = this.props.data.url;
+    let permaLink = this.props.data.permalink;
+    let author = this.props.data.author;
+    let subRedditPrefix = this.props.data.subreddit_name_prefixed;
+    let upvotes = this.props.data.score;
+    let comments = this.props.data.num_comments;
+    let date = this.props.data.created;
 
     return (
       <div className="card-body">
         <div className="card-header">
           <a href={redditLink + subRedditPrefix}>{subRedditPrefix}</a>
-          <p>u/{author}</p>
+          <a href={redditLink + "user/" + author}>{author}</a>
         </div>
+
         {url ? (
           <div className="card-img">
             <a href={url}>
@@ -33,8 +34,9 @@ class RedditCard extends Component {
         ) : (
           <div className="card-img-none"></div>
         )}
+
         <div className="card-title">
-          <a href={redditLink + permaLink}>{title}</a>
+          <a href={url}>{title}</a>
         </div>
         <div className="card-footer">
           <div className="card-updoots">
@@ -45,10 +47,12 @@ class RedditCard extends Component {
             <p>{upvotes}</p>
           </div>
           <div className="card-stats">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png"
-              alt=""
-            />
+            <a href={redditLink + permaLink}>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png"
+                alt=""
+              />
+            </a>
             <p>{comments}</p>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import "./Reddit.css"
-
+import "./Reddit.css";
 import RedditContent from "./RedditContent";
 import RedditLoading from "./RedditLoading";
 
@@ -9,63 +8,62 @@ class Reddit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redditNews: [],
-      redditDestiny: [],
-      redditUnity: [],
-      isLoaded: false,
+      redditData: {},
+      shouldFetch: true,
+      redditLoaded: false,
     };
-    this.myFunc = this.myFunc.bind(this);
+    this.handleRedditFetch = this.handleRedditFetch.bind(this);
   }
-  myFunc() {
+  handleRedditFetch() {
+    console.log("fetching");
     let redditWorldNewsUrl = "https://www.reddit.com/r/worldnews/.json";
     let redditDesitnyUrl = "https://www.reddit.com/r/Destiny/.json";
-    let redditPicsUrl = "https://www.reddit.com/r/pics/.json";
     let redditUnityUrl = "https://www.reddit.com/r/unity/.json";
-    let redditUnit3DyUrl = "https://www.reddit.com/r/Destiny/.json";
-    let redditOntarioUrl = "https://www.reddit.com/r/Destiny/.json";
-    let redditCanadaUrl = "https://www.reddit.com/r/Destiny/.json";
-    let redditWebDevUrl = "https://www.reddit.com/r/Destiny/.json";
-    let redditNewsUrl = "https://www.reddit.com/r/Destiny/.json";
-    let dataLimit = "?_limit=10";
+    let dataLimit = "?_limit=20";
 
     const redditWorldNewsFetch = fetch(redditWorldNewsUrl + dataLimit);
     const redditDestinyFetch = fetch(redditDesitnyUrl + dataLimit);
     const redditUnityFetch = fetch(redditUnityUrl + dataLimit);
 
+    const redditData = { worldNews: [], destiny: [], unity: [] };
     //data fetch
     setTimeout(() => {
-      console.log("fetching");
       redditWorldNewsFetch
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json.data.children);
-        this.setState({ redditNews: json.data.children });
-        console.log(this.state);
-      });
+        .then((res) => res.json())
+        .then((json) => {
+          json.data.children.forEach((val) => {
+            redditData.worldNews.push(val.data);
+          });
+        });
       redditDestinyFetch
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json.data.children);
-        this.setState({ redditDestiny: json.data.children });
-      });
+        .then((res) => res.json())
+        .then((json) => {
+          json.data.children.forEach((val) => {
+            redditData.destiny.push(val.data);
+          });
+        });
       redditUnityFetch
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json.data.children);
-        this.setState({ redditUnity: json.data.children });
-      });
-      this.setState({isLoaded: true})
+        .then((res) => res.json())
+        .then((json) => {
+          json.data.children.forEach((val) => {
+            redditData.unity.push(val.data);
+          });
+        });
+      this.setState({ redditData, redditLoaded: true });
     }, 2000);
   }
+  componentDidMount() {
+    this.handleRedditFetch();
+  }
+
   render() {
-    const { isLoaded } = this.state;
-    const data = { ...this.state };
-    if (!isLoaded) {
-      this.myFunc();
-    }
     return (
       <div className="RedditParent">
-        {this.state.isLoaded ? <RedditContent {...data} /> : <RedditLoading />}
+        {this.state.redditLoaded ? (
+          <RedditContent {...this.state.redditData} />
+        ) : (
+          <RedditLoading />
+        )}
       </div>
     );
   }

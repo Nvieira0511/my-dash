@@ -1,7 +1,7 @@
 .nav-link-reddit {
   position: relative;
   z-index: 2;
-  height: 34vh;
+  height: 34.45vh;
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
@@ -11,7 +11,19 @@
 }
 .nav-link-weather {
   position: relative;
-  height: 33.33vh;
+  z-index: 1;
+  height: 34.45vh;
+  margin-top: -1em;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  border-radius: 0px 0px 20px 20px;
+  filter: drop-shadow(0px 5px 5px rgb(0, 0, 0));
+  background-image: url("http://store-images.s-microsoft.com/image/apps.19014.9007199266249219.3935fe2a-af13-4fb9-bf55-92a85683a57f.96619270-3485-417c-bfaf-e981d2474bb3");
+}
+.nav-link-twitter {
+  position: relative;
+  height: 34.45vh;
   margin-top: -1em;
   background-repeat: no-repeat;
   background-position: top;
