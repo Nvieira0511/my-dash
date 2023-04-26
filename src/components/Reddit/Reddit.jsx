@@ -21,15 +21,32 @@ class Reddit extends Component {
     let redditUnityUrl = "https://www.reddit.com/r/unity/.json";
     let dataLimit = "?_limit=20";
 
-    const redditWorldNewsFetch = fetch(redditWorldNewsUrl + dataLimit);
-    const redditDestinyFetch = fetch(redditDesitnyUrl + dataLimit);
-    const redditUnityFetch = fetch(redditUnityUrl + dataLimit);
+    const redditWorldNewsFetch = fetch(redditWorldNewsUrl + dataLimit,{
+      headers: {
+        
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    });
+    const redditDestinyFetch = fetch(redditDesitnyUrl + dataLimit,{
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    });
+    const redditUnityFetch = fetch(redditUnityUrl + dataLimit,{
+      headers: {
+        'Content-Type': 'application/json',
+
+        'Accept': 'application/json'
+      }
+    });
 
     const redditData = { worldNews: [], destiny: [], unity: [] };
     //data fetch
     setTimeout(() => {
       redditWorldNewsFetch
-        .then((res) => res.json())
+        .then((res) =>res.json())
         .then((json) => {
           json.data.children.forEach((val) => {
             redditData.worldNews.push(val.data);

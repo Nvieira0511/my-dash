@@ -17,7 +17,7 @@ class RedditCardContainer extends Component {
     this.CreateCards();
   }
   CreateCards() {
-    console.log('creating cards');
+    console.log('creating cardsUPDATED');
     console.log(this.props);
     let title = this.props.data[0];
     let content = this.props.data[1];
@@ -25,6 +25,8 @@ class RedditCardContainer extends Component {
     cards = content.map((val) => {
       return val;
     });
+    console.log('cards');
+    console.log(cards);
     this.setState({ data: cards[0], containerTitle: title});
   }
   render() {
