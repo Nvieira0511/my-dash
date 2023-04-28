@@ -21,32 +21,31 @@ class Reddit extends Component {
     let redditUnityUrl = "https://www.reddit.com/r/unity/.json";
     let dataLimit = "?_limit=20";
 
-    const redditWorldNewsFetch = fetch(redditWorldNewsUrl + dataLimit,{
+    const redditWorldNewsFetch = fetch(redditWorldNewsUrl + dataLimit, {
       headers: {
-        
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     });
-    const redditDestinyFetch = fetch(redditDesitnyUrl + dataLimit,{
+    const redditDestinyFetch = fetch(redditDesitnyUrl + dataLimit, {
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     });
-    const redditUnityFetch = fetch(redditUnityUrl + dataLimit,{
+    const redditUnityFetch = fetch(redditUnityUrl + dataLimit, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
 
-        'Accept': 'application/json'
-      }
+        Accept: "application/json",
+      },
     });
 
     const redditData = { worldNews: [], destiny: [], unity: [] };
     //data fetch
     setTimeout(() => {
       redditWorldNewsFetch
-        .then((res) =>res.json())
+        .then((res) => res.json())
         .then((json) => {
           json.data.children.forEach((val) => {
             redditData.worldNews.push(val.data);
@@ -70,7 +69,31 @@ class Reddit extends Component {
     }, 2000);
   }
   componentDidMount() {
-    this.handleRedditFetch();
+    // this.handleRedditFetch();
+    console.log("Mounted");
+    console.log("getting reddit");
+
+    fetch("/reddit")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data ", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    //  console.log("here");
+    // const callBackendAPI = async () => {
+    //   const response = await fetch("/reddit");
+    //   const body = await response.json();
+
+    //   if (response.status !== 200) {
+    //     throw Error(body.message);
+    //   }
+    //   console.log('body', body);
+    //   return body;
+    // };
+    // callBackendAPI();
   }
 
   render() {

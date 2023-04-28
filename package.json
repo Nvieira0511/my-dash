@@ -1,5 +1,4 @@
 {
-  "homepage": "https://Nvieira0511.github.io/my-dash",
   "name": "my-dashboard",
   "version": "0.1.0",
   "private": true,
@@ -44,5 +43,7 @@
   },
   "devDependencies": {
     "gh-pages": "^5.0.0"
-  }
+  },
+  "proxy": "http://localhost:3000"
+
 }

@@ -22,7 +22,7 @@ class Dashboard extends Component {
     return (
       <div>
         <Routes>
-          <Route path="/" element={<DashboardNav />} />
+          <Route exact path="/" element={<DashboardNav />} />
           <Route path="/reddit" element={<Reddit />} />
         </Routes>
       </div>
