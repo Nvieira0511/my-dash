@@ -1,0 +1,31 @@
+.today-body {
+  background-color: lightblue;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.today-content {
+  display: flex;
+  flex-direction: column;
+}
+.content-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.content-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content-main p{
+ font-size: 20px;
+ padding-bottom: 10px;
+}
+img.main-weather-icon{
+  width: 100px;
+  height: 100px;
+}
+.content-footer {
+  display: flex;
+  justify-content: space-between;
+}

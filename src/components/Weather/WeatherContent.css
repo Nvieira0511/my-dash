@@ -1,0 +1,9 @@
+.weather-forecast{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+}
+.weather-today{
+    padding-bottom: 25px;
+}

@@ -7,7 +7,6 @@ class RedditCard extends Component {
   };
   static defaultProps = {};
   render() {
-    console.log(this.props);
     let redditLink = "https://www.reddit.com/";
     let title = this.props.data.title;
     let url = this.props.data.url;

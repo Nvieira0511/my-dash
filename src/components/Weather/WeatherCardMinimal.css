@@ -1,0 +1,32 @@
+.weather-card-min {
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin: 10px;
+  align-items: center;
+  min-width: 120px;
+  min-height: 120px;
+}
+.weather-card-footer {
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+}
+.weather-card-temps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+img.min-weather-icon {
+  width: 80px;
+  height: 80px;
+}
+.weather-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

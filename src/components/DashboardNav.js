@@ -22,16 +22,18 @@ class DashboardNav extends Component {
             </div>
           </div>
         </Link>
-        <div className="nav-link-weather">
-          <div className="nav-header">
-            <h2>reddit</h2>
-            <img
-              className="weather-icon"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyHKb20t7uE5A7ZUgTvJsINHlawOneyTVEoj1LVyU&s"
-              alt=""
-            />
+        <Link to="/weather">
+          <div className="nav-link-weather">
+            <div className="nav-header">
+              <h2>weather</h2>
+              <img
+                className="weather-icon"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyHKb20t7uE5A7ZUgTvJsINHlawOneyTVEoj1LVyU&s"
+                alt=""
+              />
+            </div>
           </div>
-        </div>
+        </Link>
         <div className="nav-link-twitter">
           <div className="nav-header">
             <h2>reddit</h2>
