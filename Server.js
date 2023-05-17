@@ -10,7 +10,7 @@ const path = require("path");
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/static", express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "build")));
 
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
