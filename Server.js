@@ -35,20 +35,20 @@ app.get("/reddit", (req, res) => {
 
   const redditWorldNewsFetch = fetch(redditWorldNewsUrl + dataLimit, {
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
   });
   const redditDestinyFetch = fetch(redditDesitnyUrl + dataLimit, {
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
   });
   const redditUnityFetch = fetch(redditUnityUrl + dataLimit, {
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
   });
 
@@ -94,9 +94,9 @@ app.get("/weather", (req, res) => {
   try {
     fetch(weatherFetchIngersoll, {
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
     }).then((data) => {
       data.json().then((json) => {
         let datatosend = {};
