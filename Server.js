@@ -85,7 +85,7 @@ app.get("/reddit", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
-  const weatherUrl = "http://api.weatherapi.com/v1/forecast.json";
+  const weatherUrl = "https://api.weatherapi.com/v1/forecast.json";
   const apiKey = "?key=c06cabaa901d43e8826112705231505";
   const ingersolPostal = "&q=N5C";
   const forecastData = "&days=7";
