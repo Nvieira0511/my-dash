@@ -1,3 +1,4 @@
+const { log } = require("console");
 const express = require("express"),
   bodyParser = require("body-parser");
 const app = express();
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "build")));
 
 app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader("Cache-Control", "no-store");
   next();
 });
 
@@ -84,7 +85,7 @@ app.get("/reddit", (req, res) => {
 });
 
 app.get("/weather", (req, res) => {
-  let weatherUrl = "http://api.weatherapi.com/v1/forecast.json";
+  const weatherUrl = "http://api.weatherapi.com/v1/forecast.json";
   const apiKey = "?key=c06cabaa901d43e8826112705231505";
   const ingersolPostal = "&q=N5C";
   const forecastData = "&days=7";
@@ -95,11 +96,12 @@ app.get("/weather", (req, res) => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-      }
+      },
     }).then((data) => {
       data.json().then((json) => {
         let datatosend = {};
         datatosend = json;
+        console.log(datatosend);
         res.send(datatosend);
       });
     });
