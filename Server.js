@@ -35,19 +35,19 @@ app.get("/reddit", (req, res) => {
 
   const redditWorldNewsFetch = fetch(redditWorldNewsUrl + dataLimit, {
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
   });
   const redditDestinyFetch = fetch(redditDesitnyUrl + dataLimit, {
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
   });
   const redditUnityFetch = fetch(redditUnityUrl + dataLimit, {
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
   });
@@ -94,7 +94,7 @@ app.get("/weather", (req, res) => {
   try {
     fetch(weatherFetchIngersoll, {
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       }
     }).then((data) => {
