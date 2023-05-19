@@ -93,7 +93,7 @@ app.get("/weather", (req, res) => {
   const ingersolPostal = "&q=N5C";
   const forecastData = "&days=7";
   const weatherFetchIngersoll =
-    weatherUrl + Weather_Key + ingersolPostal + forecastData;
+    weatherUrl + apiKey + ingersolPostal + forecastData;
   try {
     fetch(weatherFetchIngersoll, {
       headers: {
