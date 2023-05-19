@@ -1,17 +1,15 @@
-const { log } = require("console");
 const express = require("express"),
   bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
+const fetch = require("node-fetch");
+const cors = require('cors');
 
-// app.use((req, res, next) => {
-//   console.log(`${req.method} ${req.url}`);
-//   next();
-// });
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "build")));
+app.use(cors());
 
 app.use((req, res, next) => {
   res.setHeader("Cache-Control", "no-store");
@@ -86,11 +84,16 @@ app.get("/reddit", (req, res) => {
 
 app.get("/weather", (req, res) => {
   const weatherUrl = "https://api.weatherapi.com/v1/forecast.json";
+  const Weather_Key = process.env.Weather_Key;
+
+  console.log(process.env);
+  console.log(Weather_Key);
+  console.log(process.env.NODE_ENV);
   const apiKey = "?key=c06cabaa901d43e8826112705231505";
   const ingersolPostal = "&q=N5C";
   const forecastData = "&days=7";
   const weatherFetchIngersoll =
-    weatherUrl + apiKey + ingersolPostal + forecastData;
+    weatherUrl + Weather_Key + ingersolPostal + forecastData;
   try {
     fetch(weatherFetchIngersoll, {
       headers: {
@@ -98,11 +101,15 @@ app.get("/weather", (req, res) => {
         'Content-Type': 'application/json',
       }
     }).then((data) => {
+      console.log(data);
       data.json().then((json) => {
+      console.log(json);
+
         let datatosend = {};
         datatosend = json;
-        console.log(datatosend);
-        res.send(datatosend);
+      console.log(json);
+
+        res.json(datatosend);
       });
     });
   } catch (error) {
