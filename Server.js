@@ -16,11 +16,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  console.log("home");
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
-
 app.get("/reddit", (req, res) => {
   console.log("here reddit");
   let redditWorldNewsUrl = "https://www.reddit.com/r/worldnews/.json";
@@ -104,13 +99,18 @@ app.get("/weather", (req, res) => {
       data.json().then((json) => {
         let datatosend = {};
         datatosend = json;
-        console.log('sendingdata');
+        console.log("sendingdata");
         res.send(datatosend);
       });
     });
   } catch (error) {
     console.log(error);
   }
+});
+
+app.get("/", (req, res) => {
+  console.log("home");
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.listen(3000, () => {
