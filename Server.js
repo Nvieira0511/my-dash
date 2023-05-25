@@ -101,15 +101,11 @@ app.get("/weather", (req, res) => {
         "Content-Type": "application/json",
       },
     }).then((data) => {
-      console.log(data);
       data.json().then((json) => {
-        console.log(json);
-
         let datatosend = {};
         datatosend = json;
-        console.log(json);
-
-        res.json(datatosend);
+        console.log('sendingdata');
+        res.send(datatosend);
       });
     });
   } catch (error) {
