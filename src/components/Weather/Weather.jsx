@@ -12,8 +12,15 @@ class Weather extends Component {
     };
   }
   componentDidMount() {
+    const weatherUrl = "https://api.weatherapi.com/v1/forecast.json";
+    const apiKey = "?key=c06cabaa901d43e8826112705231505";
+    const ingersolPostal = "&q=N5C";
+    const forecastData = "&days=7";
+
+    const weatherFetchIngersoll =
+      weatherUrl + apiKey + ingersolPostal + forecastData;
     try {
-      fetch("/weather").then((res) => {
+      fetch(weatherFetchIngersoll).then((res) => {
         console.log("we are here");
         console.log(res);
         res.json().then((data) => {
@@ -29,9 +36,11 @@ class Weather extends Component {
     return (
       <div className="weather-body">
         <h1 className="weather-header">Weather</h1>
-        {
-          this.state.weatherLoaded ? <WeatherContent weatherData={this.state.weatherdata} /> : <div>LOADING </div>
-        }
+        {this.state.weatherLoaded ? (
+          <WeatherContent weatherData={this.state.weatherdata} />
+        ) : (
+          <div>LOADING </div>
+        )}
       </div>
     );
   }

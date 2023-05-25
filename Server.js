@@ -77,37 +77,37 @@ app.get("/reddit", (req, res) => {
   }
 });
 
-app.get("/weather", (req, res) => {
-  const weatherUrl = "https://api.weatherapi.com/v1/forecast.json";
-  const Weather_Key = process.env.Weather_Key;
+// app.get("/weather", (req, res) => {
+//   const weatherUrl = "https://api.weatherapi.com/v1/forecast.json";
+//   const Weather_Key = process.env.Weather_Key;
 
-  console.log(process.env);
-  console.log(Weather_Key);
-  console.log(process.env.NODE_ENV);
-  const apiKey = "?key=c06cabaa901d43e8826112705231505";
-  const ingersolPostal = "&q=N5C";
-  const forecastData = "&days=7";
-  const weatherFetchIngersoll =
-    weatherUrl + apiKey + ingersolPostal + forecastData;
-  try {
-    fetch(weatherFetchIngersoll, {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    }).then((data) => {
-      data.json().then((json) => {
-        let datatosend = {};
-        datatosend = json;
-        console.log("sendingdata");
-        let myMsg = {message: 'hello there'}
-        res.send(myMsg);
-      });
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
+//   console.log(process.env);
+//   console.log(Weather_Key);
+//   console.log(process.env.NODE_ENV);
+//   const apiKey = "?key=c06cabaa901d43e8826112705231505";
+//   const ingersolPostal = "&q=N5C";
+//   const forecastData = "&days=7";
+//   const weatherFetchIngersoll =
+//     weatherUrl + apiKey + ingersolPostal + forecastData;
+//   try {
+//     fetch(weatherFetchIngersoll, {
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//       },
+//     }).then((data) => {
+//       data.json().then((json) => {
+//         let datatosend = {};
+//         datatosend = json;
+//         console.log("sendingdata");
+//         let myMsg = {message: 'hello there'}
+//         res.send(myMsg);
+//       });
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 app.get("/", (req, res) => {
   console.log("home");
