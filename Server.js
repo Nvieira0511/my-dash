@@ -3,7 +3,7 @@ const express = require("express"),
 const app = express();
 const path = require("path");
 const fetch = require("node-fetch");
-const cors = require('cors');
+const cors = require("cors");
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -33,20 +33,20 @@ app.get("/reddit", (req, res) => {
 
   const redditWorldNewsFetch = fetch(redditWorldNewsUrl + dataLimit, {
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
   });
   const redditDestinyFetch = fetch(redditDesitnyUrl + dataLimit, {
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
   });
   const redditUnityFetch = fetch(redditUnityUrl + dataLimit, {
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
   });
 
@@ -97,17 +97,17 @@ app.get("/weather", (req, res) => {
   try {
     fetch(weatherFetchIngersoll, {
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
     }).then((data) => {
       console.log(data);
       data.json().then((json) => {
-      console.log(json);
+        console.log(json);
 
         let datatosend = {};
         datatosend = json;
-      console.log(json);
+        console.log(json);
 
         res.json(datatosend);
       });
