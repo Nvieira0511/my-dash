@@ -100,7 +100,8 @@ app.get("/weather", (req, res) => {
         let datatosend = {};
         datatosend = json;
         console.log("sendingdata");
-        res.send(datatosend);
+        let myMsg = {message: 'hello there'}
+        res.send(myMsg);
       });
     });
   } catch (error) {
