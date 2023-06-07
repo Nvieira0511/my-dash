@@ -12,11 +12,9 @@ class Reddit extends Component {
       shouldFetch: true,
       redditLoaded: false,
     };
-    this.handleRedditFetch = this.handleRedditFetch.bind(this);
   }
   handleRedditFetch() {
     console.log("fetching");
-    console.log("getting reddit data");
     setTimeout(() => {
       try {
         fetch("/reddit")
@@ -30,7 +28,29 @@ class Reddit extends Component {
     }, 2000);
   }
   componentDidMount() {
-    this.handleRedditFetch();
+    console.log("getting reddit data");
+    // try {
+    //   fetch("/reddit")
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //       this.setState({ redditData: data, redditLoaded: true });
+    //     });
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    try {
+      fetch("/reddit").then((res) => {
+        console.log(res);
+
+        res.json().then((json) => {
+          console.log(json);
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {

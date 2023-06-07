@@ -20,14 +20,20 @@ class Weather extends Component {
     const weatherFetchIngersoll =
       weatherUrl + apiKey + ingersolPostal + forecastData;
     try {
-      fetch(weatherFetchIngersoll).then((res) => {
-        console.log("we are here");
-        console.log(res);
-        res.json().then((data) => {
+      fetch("/weather")
+        .then((res) => res.json())
+        .then((data) => {
           console.log(data);
-          this.setState({ weatherdata: data, weatherLoaded: true });
+          // this.setState({ redditData: data, redditLoaded: true });
         });
-      });
+      // fetch(weatherFetchIngersoll).then((res) => {
+      //   console.log("we are here");
+      //   console.log(res);
+      //   res.json().then((data) => {
+      //     console.log(data);
+      //     this.setState({ weatherdata: data, weatherLoaded: true });
+      //   });
+      // });
     } catch (error) {
       console.log(error);
     }

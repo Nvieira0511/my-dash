@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 const fetch = require("node-fetch");
 const cors = require("cors");
+const { log } = require("console");
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -15,65 +16,54 @@ app.use((req, res, next) => {
   res.setHeader("Cache-Control", "no-store");
   next();
 });
-
+app.get("/weather", (req, res) => {
+console.log("here weather");
+});
 app.get("/reddit", (req, res) => {
   console.log("here reddit");
-  let redditWorldNewsUrl = "https://www.reddit.com/r/worldnews/.json";
-  let redditDesitnyUrl = "https://www.reddit.com/r/Destiny/.json";
-  let redditUnityUrl = "https://www.reddit.com/r/unity/.json";
+  let redditFetchUrl = "https://www.reddit.com/r/";
   let dataLimit = "?_limit=20";
 
-  const redditData = { worldNews: [], destiny: [], unity: [] };
-  const redditDataTest = [];
+  let worldNewsUrl = "worldnews/.json";
+  let desitnyUrl = "Destiny/.json";
+  let unityUrl = "unity/.json";
 
-  const redditWorldNewsFetch = fetch(redditWorldNewsUrl + dataLimit, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
-  const redditDestinyFetch = fetch(redditDesitnyUrl + dataLimit, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
-  const redditUnityFetch = fetch(redditUnityUrl + dataLimit, {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
+  let fetchHeaders = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
 
+  let redditData = { worldNews: [], destiny: [], unity: [] };
+
+  const urls = [worldNewsUrl, desitnyUrl, unityUrl];
+  const myfetch = fetch(
+    redditFetchUrl + worldNewsUrl + dataLimit,
+    fetchHeaders
+  );
   try {
-    redditWorldNewsFetch
-      .then((res) => res.json())
-      .then((json) => {
-        json.data.children.forEach((val) => {
-          redditData.worldNews.push(val.data);
+    Promise.all(
+      urls.map((url) => {
+        fetch(redditFetchUrl + url + dataLimit, fetchHeaders).then((res) => {
+          res.json().then((json) => {
+            let jsonObj = json.data.children
+            console.log(jsonObj.data);
+          });
         });
       })
-      .then(() => {
-        redditDestinyFetch
-          .then((res) => res.json())
-          .then((json) => {
-            json.data.children.forEach((val) => {
-              redditData.destiny.push(val.data);
-            });
-          })
-          .then(() => {
-            redditUnityFetch
-              .then((res) => res.json())
-              .then((json) => {
-                json.data.children.forEach((val) => {
-                  redditData.unity.push(val.data);
-                });
-                res.send(redditData);
-              });
-          });
-      });
-  } catch (error) {
-    console.log(error);
+    );
+
+    // myfetch.then((data) => {
+    //   data.json().then((json) => {
+    //     json.data.children.forEach((val) => {
+    //       redditData.worldNews.push(val.data);
+    //     });
+    //     console.log(redditData);
+    //     res.send(redditData);
+    //   });
+    // });
+    // console.log(redditData);
+  } catch (err) {
+    console.log(err);
   }
 });
 
