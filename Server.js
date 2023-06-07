@@ -4,7 +4,6 @@ const app = express();
 const path = require("path");
 const fetch = require("node-fetch");
 const cors = require("cors");
-const { log } = require("console");
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -17,8 +16,28 @@ app.use((req, res, next) => {
   next();
 });
 app.get("/weather", (req, res) => {
-console.log("here weather");
-console.log(process.env.WEATHER_API_KEY);
+  console.log("here weather");
+  console.log(process.env.WEATHER_API_KEY);
+  const weatherUrl = "https://api.weatherapi.com/v1/forecast.json";
+  const ingersolPostal = "&q=N5C";
+  const forecastData = "&days=7";
+  const weatherFetchIngersoll =
+    weatherUrl + process.env.WEATHER_API_KEY + ingersolPostal + forecastData;
+
+  let response = {}
+  try {
+    fetch(weatherFetchIngersoll).then((res) => {
+      console.log("we are here");
+      console.log(res);
+      res.json().then((data) => {
+        console.log(data);
+        response = data
+      });
+    });
+    res.send(response)
+  } catch (error) {
+    console.log(error);
+  }
 });
 app.get("/reddit", (req, res) => {
   console.log("here reddit");
@@ -46,7 +65,7 @@ app.get("/reddit", (req, res) => {
       urls.map((url) => {
         fetch(redditFetchUrl + url + dataLimit, fetchHeaders).then((res) => {
           res.json().then((json) => {
-            let jsonObj = json.data.children
+            let jsonObj = json.data.children;
             console.log(jsonObj.data);
           });
         });

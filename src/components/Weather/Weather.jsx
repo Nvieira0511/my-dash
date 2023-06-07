@@ -26,6 +26,7 @@ class Weather extends Component {
           console.log(data);
           // this.setState({ redditData: data, redditLoaded: true });
         });
+        
       // fetch(weatherFetchIngersoll).then((res) => {
       //   console.log("we are here");
       //   console.log(res);
