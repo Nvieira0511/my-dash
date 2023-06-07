@@ -18,6 +18,7 @@ app.use((req, res, next) => {
 });
 app.get("/weather", (req, res) => {
 console.log("here weather");
+console.log(process.env.WEATHER_API_KEY);
 });
 app.get("/reddit", (req, res) => {
   console.log("here reddit");
