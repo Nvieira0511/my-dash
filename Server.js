@@ -1,44 +1,102 @@
 const express = require("express"),
-  bodyParser = require("body-parser");
+  bodyParser = require("body-parser"),
+  mongoose = require("mongoose");
 const app = express();
 const path = require("path");
-const fetch = require("node-fetch");
 const cors = require("cors");
 
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "build")));
 app.use(cors());
+
+//fucking finally we are connected
+mongoose
+  .connect("mongodb://127.0.0.1:27017/my-dashdb", {
+    useNewUrlParser: true,
+    useUnifiedTopology: false,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("MongoDB connection error:", error);
+  });
+//define schema
+const todoSchema = new mongoose.Schema({
+  id: String,
+  title: String,
+  description: String,
+  completed: Boolean,
+});
+//create model based on schema
+const Todo = mongoose.model("Todo", todoSchema);
 
 app.use((req, res, next) => {
   res.setHeader("Cache-Control", "no-store");
   next();
 });
+
+//weather working!
 app.get("/weather", (req, res) => {
-  console.log("here weather");
-  console.log(process.env.WEATHER_API_KEY);
   const weatherUrl = "https://api.weatherapi.com/v1/forecast.json";
   const ingersolPostal = "&q=N5C";
   const forecastData = "&days=7";
+  const weatherAPI = "?key=c06cabaa901d43e8826112705231505";
+
   const weatherFetchIngersoll =
     weatherUrl + process.env.WEATHER_API_KEY + ingersolPostal + forecastData;
 
-  let response = {}
+  const weatherFetchIngersollLocal =
+    weatherUrl + weatherAPI + ingersolPostal + forecastData;
+
   try {
-    fetch(weatherFetchIngersoll).then((res) => {
-      console.log("we are here");
-      console.log(res);
-      res.json().then((data) => {
-        console.log(data);
-        response = data
-      });
-    });
-    res.send(response)
+    fetch(weatherFetchIngersollLocal)
+      .then((data) => data.json())
+      .then((json) => res.send(json));
   } catch (error) {
     console.log(error);
   }
 });
+
+
+
+app.post("/addTodo", (req, res) => {
+  // Create a new Todo document and save it to the database
+  const newTodo = new Todo({
+    title: req.body.title,
+    completed: req.body.completed,
+  });
+  newTodo
+    .save()
+    .then((data) => {
+      console.log("todosaved " + data);
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log("error inserting " + err);
+    });
+});
+
+app.get("/getTodos", (req, res) => {
+  Todo.find({}).then((todos) => {
+    res.send(todos);
+  });
+});
+
+app.post("/removeTodo", async (req, res) => {
+  try {
+    await Todo.findByIdAndDelete(req.body.id);
+    // Handle success
+    res.send("Todo deleted successfully");
+  } catch (error) {
+    // Handle error
+    console.error("Error deleting todo:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 app.get("/reddit", (req, res) => {
   console.log("here reddit");
   let redditFetchUrl = "https://www.reddit.com/r/";
@@ -86,38 +144,6 @@ app.get("/reddit", (req, res) => {
     console.log(err);
   }
 });
-
-// app.get("/weather", (req, res) => {
-//   const weatherUrl = "https://api.weatherapi.com/v1/forecast.json";
-//   const Weather_Key = process.env.Weather_Key;
-
-//   console.log(process.env);
-//   console.log(Weather_Key);
-//   console.log(process.env.NODE_ENV);
-//   const apiKey = "?key=c06cabaa901d43e8826112705231505";
-//   const ingersolPostal = "&q=N5C";
-//   const forecastData = "&days=7";
-//   const weatherFetchIngersoll =
-//     weatherUrl + apiKey + ingersolPostal + forecastData;
-//   try {
-//     fetch(weatherFetchIngersoll, {
-//       headers: {
-//         Accept: "application/json",
-//         "Content-Type": "application/json",
-//       },
-//     }).then((data) => {
-//       data.json().then((json) => {
-//         let datatosend = {};
-//         datatosend = json;
-//         console.log("sendingdata");
-//         let myMsg = {message: 'hello there'}
-//         res.send(myMsg);
-//       });
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
 
 app.get("/", (req, res) => {
   console.log("home");

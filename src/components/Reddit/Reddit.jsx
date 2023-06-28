@@ -13,41 +13,13 @@ class Reddit extends Component {
       redditLoaded: false,
     };
   }
-  handleRedditFetch() {
-    console.log("fetching");
-    setTimeout(() => {
-      try {
-        fetch("/reddit")
-          .then((res) => res.json())
-          .then((data) => {
-            this.setState({ redditData: data, redditLoaded: true });
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    }, 2000);
-  }
   componentDidMount() {
-    console.log("getting reddit data");
-    // try {
-    //   fetch("/reddit")
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //       this.setState({ redditData: data, redditLoaded: true });
-    //     });
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
     try {
-      fetch("/reddit").then((res) => {
-        console.log(res);
-
-        res.json().then((json) => {
-          console.log(json);
+      fetch("/reddit")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
         });
-      });
     } catch (error) {
       console.log(error);
     }

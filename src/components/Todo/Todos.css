@@ -1,0 +1,12 @@
+.todo-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.todo-header{
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.todo-form{
+    padding-bottom: .5em;
+}

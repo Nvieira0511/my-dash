@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "my-dash",
   "builds": [{ "src": "Server.js", "use": "@vercel/node" }],
   "routes": [{ "src": "/(.*)", "dest": "/Server.js" }]
 }
