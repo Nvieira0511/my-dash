@@ -11,11 +11,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "build")));
 app.use(cors());
 const mongoConnectionString = "mongodb+srv://my-dash-user:0L2jIC1ZRA2FdAmX@cluster0.gscgfal.mongodb.net/?retryWrites=true&w=majority";
-const MONGO_PROD_URI="mongodb://my-dash-user:0L2jIC1ZRA2FdAmX@main-shard-00-00-03xkr.mongodb.net:27017,main-shard-00-01-03xkr.mongodb.net:27017,main-shard-00-02-03xkr.mongodb.net:27017/main?ssl=true&replicaSet=Main-shard-0&authSource=admin&retryWrites=true";
+const MONGO_PROD_URI="mongodb+srv://my-dash-user:0L2jIC1ZRA2FdAmX@cluster0.gscgfal.mongodb.net/";
 
 //fucking finally we are connected
 mongoose
-  .connect(MONGO_PROD_URI, {
+  .connect(process.env.MONGO_PROD_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: false,
   })
