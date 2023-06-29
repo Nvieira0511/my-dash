@@ -27,7 +27,10 @@ mongoose
   .catch((error) => {
     console.error("MongoDB connection error:", error);
   });
+
 const db = client.db(process.env.DB_NAME);
+const collection = db.collection("your-collection-name");
+
 //define schema
 const todoSchema = new mongoose.Schema({
   id: String,
@@ -153,6 +156,9 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-app.listen(3000, () => {
-  console.log("Server started on port 3000");
+// app.listen(3000, () => {
+//   console.log("Server started on port 3000");
+// });
+app.listen(process.env.PORT, () => {
+  console.log("Server started on" + process.env.PORT);
 });
