@@ -12,9 +12,7 @@ app.use(express.static(path.join(__dirname, "build")));
 app.use(cors());
 const mongoConnectionString =
   "mongodb+srv://my-dash-user:0L2jIC1ZRA2FdAmX@cluster0.gscgfal.mongodb.net/?retryWrites=true&w=majority";
-const MONGO_PROD_URI =
-  "mongodb+srv://my-dash-user:0L2jIC1ZRA2FdAmX@cluster0.gscgfal.mongodb.net/";
-
+  
 //fucking finally we are connected
 mongoose
   .connect(process.env.MONGO_PROD_URI, {
@@ -28,8 +26,6 @@ mongoose
     console.error("MongoDB connection error:", error);
   });
 
-const db = client.db(process.env.DB_NAME);
-const collection = db.collection("your-collection-name");
 
 //define schema
 const todoSchema = new mongoose.Schema({
