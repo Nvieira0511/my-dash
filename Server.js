@@ -10,10 +10,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "build")));
 app.use(cors());
+const mongoConnectionString = "mongodb+srv://my-dash-user:0L2jIC1ZRA2FdAmX@cluster0.gscgfal.mongodb.net/?retryWrites=true&w=majority";
+const MONGO_PROD_URI="mongodb+srv://my-dash-user:0L2jIC1ZRA2FdAmX@Project 0.mongodb.net/<dbname>?retryWrites=true&w=majority";
 
 //fucking finally we are connected
 mongoose
-  .connect("mongodb://127.0.0.1:27017/my-dashdb", {
+  .connect(MONGO_PROD_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: false,
   })
@@ -52,7 +54,7 @@ app.get("/weather", (req, res) => {
     weatherUrl + weatherAPI + ingersolPostal + forecastData;
 
   try {
-    fetch(weatherFetchIngersollLocal)
+    fetch(weatherFetchIngersoll)
       .then((data) => data.json())
       .then((json) => res.send(json));
   } catch (error) {
