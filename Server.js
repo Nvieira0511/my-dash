@@ -10,8 +10,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "build")));
 app.use(cors());
-const mongoConnectionString = "mongodb+srv://my-dash-user:0L2jIC1ZRA2FdAmX@cluster0.gscgfal.mongodb.net/?retryWrites=true&w=majority";
-const MONGO_PROD_URI="mongodb+srv://my-dash-user:0L2jIC1ZRA2FdAmX@cluster0.gscgfal.mongodb.net/";
+const mongoConnectionString =
+  "mongodb+srv://my-dash-user:0L2jIC1ZRA2FdAmX@cluster0.gscgfal.mongodb.net/?retryWrites=true&w=majority";
+const MONGO_PROD_URI =
+  "mongodb+srv://my-dash-user:0L2jIC1ZRA2FdAmX@cluster0.gscgfal.mongodb.net/";
 
 //fucking finally we are connected
 mongoose
@@ -25,6 +27,7 @@ mongoose
   .catch((error) => {
     console.error("MongoDB connection error:", error);
   });
+const db = client.db(process.env.DB_NAME);
 //define schema
 const todoSchema = new mongoose.Schema({
   id: String,
@@ -61,8 +64,6 @@ app.get("/weather", (req, res) => {
     console.log(error);
   }
 });
-
-
 
 app.post("/addTodo", (req, res) => {
   // Create a new Todo document and save it to the database
